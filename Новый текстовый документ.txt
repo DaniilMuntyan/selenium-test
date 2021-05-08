@@ -1,0 +1,34 @@
+"""Scenario: Getting to "contact us"
+    Given I am on https://www.epam.com/
+    When I click "contact us" button
+    Then I should get redirected to the contact us page
+
+  Scenario:  Searching
+    Given I am on https://www.epam.com/
+    When I type "mobile" and press enter
+    Then I should see all results related to mobile theme
+
+  Scenario: Linkedin redirect
+    Given I am on https://www.epam.com/
+    When I scroll down and click on sign of Linkedin
+    Then I should be redirected to the appropriate page of www.linkedin.com
+
+  Scenario: Changing filters
+    Given I am on https://www.epam.com/careers/blog
+    When I choose some filters at the "All topics" list
+    Then I should get list of pages related to chosen topics
+
+  Scenario: Check the event
+    Given I am on https://www.epam.com/about/who-we-are/events
+    When I click on "meet us"
+    Then I should get all information about the event
+
+  Scenario: Seeing cybersecurity latest works of the company
+    Given I am on https://www.epam.com/services/consult-and-design/enterprise-technology-and-operations-transformation/cybersecurity
+    When I click on "EXPLORE OUR LATEST WORK"
+    Then I should see several links to the pages with text desribing the work
+
+  Scenario: Share the work 
+    Given I am on https://www.epam.com/about/newsroom/in-the-news/2021/mitigating-threats-to-the-application-layer
+    When I click on "Share" near the linkedin sign
+    Then I should get redirected to linkedin and be able to repost this work"""
