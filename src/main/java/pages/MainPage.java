@@ -35,20 +35,11 @@ public final class MainPage implements Page {
         this.locationSelectorBtn.click();
         this.toPolandPage.click();
     }
-
-    public void checkPoland() {
-        System.out.println(this.driver.getCurrentUrl() + "\t" + Urls.POLSKA);
-        assertEquals(Urls.POLSKA.toString(), this.driver.getCurrentUrl());
-    }
     // endregion
 
     // region Test 2
     public void clickContactUs() {
         contactUs.click();
-    }
-
-    public void checkContactUs() {
-        assertEquals(Urls.CONTACT_US.toString(), this.driver.getCurrentUrl());
     }
     // endregion
 }

@@ -29,10 +29,5 @@ public class CareersPage implements Page {
     public void clickCompanyContact() {
         companyContact.click();
     }
-
-    public void findMail() {
-        WebElement element = driver.findElement(By.cssSelector("a[href=\"mailto:jobs_by@epam.com\"]"));
-        assertNotNull(element);
-    }
     // endregion
 }

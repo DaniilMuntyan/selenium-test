@@ -41,21 +41,12 @@ public class CybersecurityPage implements Page {
         Actions actions = new Actions(driver);
         actions.moveToElement(exploreOurWorkBtn).click().build().perform();
     }
-
-    public void checkExploreWork() {
-        WebElement latestWorks = driver.findElement(By.className("featured-content-grid-ui"));
-        assertNotNull(latestWorks);
-    }
     // endregion
 
     // region Test 5
     public void clickPrivacyPolicy() {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", privacyPolicyBtn);
-    }
-
-    public void checkPrivatePolicyRedirect() {
-        assertEquals(Urls.POLICY.toString(), driver.getCurrentUrl());
     }
     // endregion
 
@@ -65,20 +56,11 @@ public class CybersecurityPage implements Page {
         action.moveToElement(about).build().perform();
         driver.findElement(By.cssSelector("a[href=\"/about/investors/faq\"]")).click();
     }
-
-    public void checkFaqRedirect() {
-        assertEquals(Urls.FAQ.toString(), driver.getCurrentUrl());
-    }
     // endregion
 
     // region Test 7
     public void searchClick() {
         searchBtn.click();
-    }
-
-    public void checkSearchInput() {
-        WebElement element = driver.findElement(By.cssSelector("button[class=\"header-search__submit\"]"));
-        assertTrue(element.isDisplayed());
     }
     // endregion
 

@@ -6,12 +6,15 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.CareersPage;
 import pages.CybersecurityPage;
 import pages.EventPage;
 import pages.MainPage;
+
+import static org.junit.Assert.*;
 
 
 public class SeleniumTester {
@@ -38,7 +41,7 @@ public class SeleniumTester {
         driver.quit();
     }
 
-    @Given("I am on https://www\\.epam\\.com/")
+    @Given("I am on the main web page")
     public void mainPage() {
         createDriver();
         mainPage.navigate();
@@ -49,9 +52,10 @@ public class SeleniumTester {
         mainPage.toPoland();
     }
 
-    @Then("I should see page was translated")
+    @Then("^I should see page was translated$")
     public void expectPolska() {
-        mainPage.checkPoland();
+        System.out.println(this.driver.getCurrentUrl() + "\t" + Urls.POLSKA);
+        assertEquals(Urls.POLSKA.toString(), this.driver.getCurrentUrl());
     }
 
     @When("^I click \"contact us\" button$")
@@ -61,10 +65,10 @@ public class SeleniumTester {
 
     @Then("^I should get redirected to the contact us page$")
     public void contactUsRedirect() {
-        mainPage.checkContactUs();
+        assertEquals(Urls.CONTACT_US.toString(), this.driver.getCurrentUrl());
     }
 
-    @Given("^I am on https://www\\.epam\\.com/about/who-we-are/events$")
+    @Given("^About-who-we-are page opened$")
     public void eventsPage() {
         createDriver();
         eventPage.navigate();
@@ -77,11 +81,12 @@ public class SeleniumTester {
 
     @Then("^I should get all information about the event$")
     public void meetUsRedirect() {
-        eventPage.checkMeetUs();
+        WebElement details = driver.findElement(By.cssSelector("div[class=\"container event-details-page__container\"]"));
+        assertNotNull(details);
     }
 
-    @Given("^I am on https://www\\.epam\\.com/services/consult-and-design/enterprise-technology-and-operations-transformation/cybersecurity$")
-    public void cybersecurityPage() throws InterruptedException {
+    @Given("^Cybersecurity web page opened$")
+    public void cybersecurityPage() {
         createDriver();
         cybersecurityPage.navigate();
     }
@@ -93,7 +98,8 @@ public class SeleniumTester {
 
     @Then("^I should see several links to the pages with text describing the work$")
     public void latestWorkRedirect() {
-        cybersecurityPage.checkExploreWork();
+        WebElement latestWorks = driver.findElement(By.className("featured-content-grid-ui"));
+        assertNotNull(latestWorks);
     }
 
     @When("^I click on privacy policy link$")
@@ -103,7 +109,7 @@ public class SeleniumTester {
 
     @Then("^I should be redirected to Privacy policy page$")
     public void policyRedirect() {
-        cybersecurityPage.checkPrivatePolicyRedirect();
+        assertEquals(Urls.POLICY.toString(), driver.getCurrentUrl());
     }
 
     @When("^I click on FAQ$")
@@ -113,7 +119,7 @@ public class SeleniumTester {
 
     @Then("^I should be redirected to the FAQ page$")
     public void faqRedirect() {
-        cybersecurityPage.checkFaqRedirect();
+        assertEquals(Urls.FAQ.toString(), driver.getCurrentUrl());
     }
 
     @When("^I click on search symbol$")
@@ -123,10 +129,11 @@ public class SeleniumTester {
 
     @Then("^I should see search input box$")
     public void searchInput() {
-        cybersecurityPage.checkSearchInput();
+        WebElement element = driver.findElement(By.cssSelector("button[class=\"header-search__submit\"]"));
+        assertTrue(element.isDisplayed());
     }
 
-    @Given("^I am on https://careers\\.epam\\.by/$")
+    @Given("^Careers page opened in By location$")
     public void byCareersPage() {
         createDriver();
         careersPage.navigate();
@@ -137,8 +144,9 @@ public class SeleniumTester {
         careersPage.clickCompanyContact();
     }
 
-    @Then("^I should be able to find mail jobs_by@epam\\.com$")
+    @Then("^I should be able to find the mail of company$")
     public void findMail() {
-        careersPage.findMail();
+        WebElement element = driver.findElement(By.cssSelector("a[href=\"mailto:jobs_by@epam.com\"]"));
+        assertNotNull(element);
     }
 }
